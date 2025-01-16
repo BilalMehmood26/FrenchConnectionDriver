@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_55sdp"
         android:background="@drawable/rounded_bottom_only"
-        app:layout_constraintTop_toTopOf="0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/back_btn"
@@ -22,8 +22,8 @@
         android:padding="@dimen/_6sdp"
         android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toStartOf="0"
-        app:layout_constraintTop_toTopOf="0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleTV"
@@ -36,16 +36,16 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="0"
-        app:layout_constraintStart_toStartOf="0"
-        app:layout_constraintTop_toTopOf="0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:id="@+id/map_fragment"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,8 +67,8 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:src="@drawable/chat_dummy"
-            app:layout_constraintStart_toStartOf="0"
-            app:layout_constraintTop_toTopOf="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="20dp" />
 
         <LinearLayout
@@ -78,6 +78,7 @@
             android:layout_marginHorizontal="@dimen/_7sdp"
             android:layout_marginLeft="@dimen/_7sdp"
             android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/profileIV"
             app:layout_constraintEnd_toStartOf="@+id/status_tv"
@@ -140,7 +141,7 @@
             android:layout_height="@dimen/_25sdp"
             android:src="@drawable/ic_phone"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toEndOf="0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/status_tv" />
 
         <ImageView
@@ -161,8 +162,8 @@
             android:text="Completed"
             android:textColor="@color/gradient_1"
             android:textSize="@dimen/_9sdp"
-            app:layout_constraintEnd_toEndOf="0"
-            app:layout_constraintTop_toTopOf="0" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -186,8 +187,8 @@
                     android:backgroundTint="@color/border_color"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_mark_gold"
-                    app:layout_constraintStart_toStartOf="0"
-                    app:layout_constraintTop_toTopOf="0" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -196,7 +197,7 @@
                     android:layout_marginLeft="@dimen/_7sdp"
                     android:layout_marginRight="@dimen/_7sdp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="0"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/markIV"
                     app:layout_constraintTop_toTopOf="@+id/markIV">
 
@@ -233,8 +234,8 @@
                     android:backgroundTint="@color/border_color"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_mark_gold"
-                    app:layout_constraintStart_toStartOf="0"
-                    app:layout_constraintTop_toTopOf="0" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -243,7 +244,7 @@
                     android:layout_marginLeft="@dimen/_7sdp"
                     android:layout_marginRight="@dimen/_7sdp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="0"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/dropIV"
                     app:layout_constraintTop_toTopOf="@+id/dropIV">
 
@@ -353,15 +354,15 @@
         android:text="Reached"
         android:textColor="@color/black"
         android:textSize="@dimen/_13sdp"
-        app:layout_constraintBottom_toBottomOf="0" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="0"
-        app:layout_constraintEnd_toEndOf="0"
-        app:layout_constraintStart_toStartOf="0"
-        app:layout_constraintTop_toTopOf="0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

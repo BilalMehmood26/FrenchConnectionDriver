@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.frenchconnectiondriver.R
 import com.example.frenchconnectiondriver.databinding.FragmentProfileBinding
@@ -15,6 +17,8 @@ import com.example.frenchconnectiondriver.ui.activity.DriverInfoActivity
 import com.example.frenchconnectiondriver.ui.activity.EditProfileActivity
 import com.example.frenchconnectiondriver.ui.activity.NotificationActivity
 import com.example.frenchconnectiondriver.ui.util.UserSession
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -65,6 +69,22 @@ class ProfileFragment : Fragment() {
                     androidx.appcompat.R.anim.abc_fade_in,
                     androidx.appcompat.R.anim.abc_fade_out
                 )
+            }
+
+            deleteLayout.setOnClickListener {
+                progressBar.visibility = View.VISIBLE
+                val user = Firebase.auth.currentUser!!
+
+                user.delete().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            progressBar.visibility = View.GONE
+                           requireActivity().finish()
+                        }else{
+                            progressBar.visibility = View.GONE
+                            Log.d("Logger", "setListener: ${task.exception!!.message}")
+                            Toast.makeText(fragmentContext, "${task.exception!!.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
 

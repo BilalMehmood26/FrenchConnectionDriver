@@ -137,7 +137,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setRideTab() {
         binding.rideTab.setImageResource(R.drawable.bottom_ride_selected)
-        binding.titleTV.text = "Schedule a Ride"
+        binding.titleTV.text = "My Ride"
         loadFragment(MyRideFragment())
     }
 

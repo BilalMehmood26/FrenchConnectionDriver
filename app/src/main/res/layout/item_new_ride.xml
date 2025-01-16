@@ -27,6 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginLeft="@dimen/_7sdp"
         android:layout_marginRight="@dimen/_7sdp"
         android:orientation="vertical"
@@ -40,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Marie Winter"
+            android:text="---- ----"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 

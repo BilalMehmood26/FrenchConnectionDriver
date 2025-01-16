@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(binding.root)
         setListener()
         if (ActivityCompat.checkSelfPermission(
                 this@SignUpActivity,
@@ -90,10 +90,10 @@ class SignUpActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
             FirebaseMessaging.getInstance().token.addOnSuccessListener {
-                userDetails(fullName, email, password,it)
+                userDetails(fullName, email, password, it)
             }.addOnFailureListener {
                 Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
-                userDetails(fullName, email, password,"")
+                userDetails(fullName, email, password, "")
             }
         }.addOnFailureListener {
             binding.progressBar.visibility = View.GONE
@@ -101,7 +101,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun userDetails(fullName: String, email: String, password: String,token:String) {
+    private fun userDetails(fullName: String, email: String, password: String, token: String) {
 
         locationUtility.requestLocationUpdates { currentLocation ->
             userLat = currentLocation.latitude

@@ -1,60 +1,72 @@
 package com.example.frenchconnectiondriver.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.frenchconnectiondriver.R
+import com.example.frenchconnectiondriver.databinding.FragmentChatBinding
+import com.example.frenchconnectiondriver.ui.adapter.ChatAdapter
+import com.example.frenchconnectiondriver.ui.model.ChatModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChatFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val binding: FragmentChatBinding by lazy {
+        FragmentChatBinding.inflate(layoutInflater)
     }
+
+    private val db = Firebase.firestore
+    private lateinit var fragmentContext: Context
+    private val chatList: ArrayList<ChatModel> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+
+        getChatUser()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChatFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun getChatUser() {
+        binding.progressBar.visibility = View.VISIBLE
+        db.collection("Chat").get().addOnSuccessListener { queryDocumentSnapshots ->
+            for (document in queryDocumentSnapshots) {
+                val lastMessage = document.get("lastMessage") as? Map<String, Any>
+                val hasCurrentUser = lastMessage?.get("fromID") as? String
+                val hasOpponentUser = lastMessage?.get("toID") as? String
+
+                if (hasCurrentUser != null && hasCurrentUser == Firebase.auth.currentUser!!.uid) {
+                    val chatModel = ChatModel(hasOpponentUser, hasCurrentUser, document.id)
+                    chatList.add(chatModel)
+                    Log.d("Logger", "getChatUser: ${chatList.size} ${document.id}")
                 }
             }
+            binding.progressBar.visibility = View.GONE
+            setChatAdapter()
+        }
+
+
+    }
+
+    private fun setChatAdapter() {
+        Log.d("Logger", "setChatAdapter: adapter: ${chatList.size}")
+        binding.chatRV.layoutManager = LinearLayoutManager(fragmentContext)
+        binding.chatRV.adapter = ChatAdapter(fragmentContext, chatList)
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentContext = context
     }
 }
