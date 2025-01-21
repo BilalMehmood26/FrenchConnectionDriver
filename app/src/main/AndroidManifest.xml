@@ -5,7 +5,6 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/main_logo"
         android:supportsRtl="true"
+        android:name=".ui.util.MyApp"
         android:theme="@style/Theme.FrenchConnectionUser"
         tools:targetApi="31">
         <activity
@@ -50,17 +50,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FrenchConnectionUser">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <service
+            android:name=".ui.util.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </activity>
+        </service>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
